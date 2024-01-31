@@ -24,10 +24,15 @@ function TableItem({
   const [filtered, setFiltered] = useState<Calc[]>([]);
 
   const getTax = (val: number) => {
-    if (val <= 2) return val * 1000;
-    else if (val <= 4) return val * 3000;
-    else if (val <= 6) return val * 6000;
-    else return val * 10000;
+    return new Array(val)
+      .fill(0)
+      .map((ele, index) => {
+        if (index <= 1) return 1000;
+        else if (index <= 3) return 3000;
+        else if (index <= 5) return 6000;
+        else return 10000;
+      })
+      .reduce((acc, cur) => acc + cur, 0);
   };
 
   useEffect(() => {
@@ -55,9 +60,6 @@ function TableItem({
 
   useEffect(() => {
     if (filtered.length > 0) setStack({ val: 0, ind: 0 });
-    if (user.id === 'jungyun01') {
-      console.log(filtered);
-    }
   }, [filtered]);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import styles from './App.module.scss';
 import axios from 'axios';
 import Table from './Table';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import Main from './Main';
 
 function App() {
@@ -17,16 +17,10 @@ function App() {
   }, []);
 
   return (
-    <div className={styles['App']}>
-      <div className={styles['App-header']}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/:param" element={<Main />} />
-            <Route path="*" element={<Main />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/:param" element={<Main />} />
+      <Route path="*" element={<Main />} />
+    </Routes>
   );
 }
 

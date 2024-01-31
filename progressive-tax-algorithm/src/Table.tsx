@@ -177,7 +177,7 @@ function Table({ week }: { week: number }) {
               <table className="table table-responsive-xl">
                 <thead>
                   <tr>
-                    <th>Username</th>
+                    <th>Handle</th>
                     {problemList ? (
                       problemList.map((ele) => {
                         return <th>{ele.id}</th>;
