@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/algo-study/static/css/main.d80660be.css",
+    "main.js": "/algo-study/static/js/main.765eff4d.js",
+    "static/js/27.bf622abf.chunk.js": "/algo-study/static/js/27.bf622abf.chunk.js",
+    "index.html": "/algo-study/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.d80660be.css",
+    "static/js/main.765eff4d.js"
+  ]
+}

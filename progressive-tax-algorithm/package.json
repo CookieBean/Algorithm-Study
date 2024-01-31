@@ -1,5 +1,6 @@
 {
   "name": "progressive-tax-algorithm",
+  "homepage": "https://cookiebean.github.io/algo-study",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

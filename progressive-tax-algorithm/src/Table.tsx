@@ -27,7 +27,7 @@ function Table({ week }: { week: number }) {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/problem/' + week, {
+      .get('https://progressive-tax-algorithm.fly.dev/problem/' + week, {
         withCredentials: true,
       })
       .then((res) => {
@@ -42,7 +42,7 @@ function Table({ week }: { week: number }) {
     if (totalProblemList.length < week) {
       const qweek = totalProblemList.length + 1;
       axios
-        .get('http://localhost:5000/problem/' + qweek, {
+        .get('https://progressive-tax-algorithm.fly.dev/problem/' + qweek, {
           withCredentials: true,
         })
         .then((res) => {
@@ -71,7 +71,10 @@ function Table({ week }: { week: number }) {
         try {
           axios
             .get(
-              'http://localhost:5000/submit/' + data[ind].week + '/' + ele.id,
+              'https://progressive-tax-algorithm.fly.dev/submit/' +
+                data[ind].week +
+                '/' +
+                ele.id,
               {
                 withCredentials: true,
               },

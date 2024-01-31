@@ -9,7 +9,6 @@ const boj = 'https://www.acmicpc.net'
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://davinci2003:${process.env.MONGODB}@cluster0.x5mhjao.mongodb.net/?retryWrites=true&w=majority`;
-console.log(process.env.MONGODB[0])
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -24,7 +23,7 @@ const headers = {
 }
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://cookiebean.github.io',
   credentials: true
 }
 
@@ -126,6 +125,7 @@ app.get('/problem/:week', async(req, res, next) => {
   const week = req.params['week']
   const col =  client.db("Data").collection("Problem")
   const query = { week: week };
+  console.log('Sending Query')
   const result = await col.findOne(query);
   console.log(result)
   if(result) {
