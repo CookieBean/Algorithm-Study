@@ -1,0 +1,229 @@
+@import 'bootstrap/bootstrap';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+
+$font-primary: 'Poppins', Arial, sans-serif;
+$primary: #40bfc1;
+$ac: #64e291;
+$tle: #ffa153;
+$wa: #fa7268;
+$pac: #f6d365;
+$rte: #7f7398;
+$mle: #ffa153;
+
+body {
+  font-family: $font-primary;
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: normal;
+  background: #f8f9fd;
+  color: lighten($black, 50%);
+}
+a {
+  transition: 0.3s all ease;
+  color: $primary;
+  &:hover,
+  &:focus {
+    text-decoration: none !important;
+    outline: none !important;
+    box-shadow: none;
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: $font-primary;
+  color: $black;
+}
+
+.bg-primary {
+  background: $primary !important;
+}
+
+.ftco-section {
+  > .container {
+    width: 80vw;
+  }
+}
+
+.ftco-no-pt {
+  padding-top: 0;
+}
+.ftco-no-pb {
+  padding-bottom: 0;
+}
+//HEADING SECTION
+.heading-section {
+  font-size: 28px;
+  color: $black;
+}
+
+//COVER BG
+.img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+tr {
+  margin-bottom: 10px;
+  border-bottom: 4px solid #f8f9fd;
+  &:last-child() {
+    border-bottom: 0;
+  }
+  .handle-b {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: #ad5600;
+  }
+  .handle-s {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: #435f7a;
+  }
+  .handle-g {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: #ec9a00;
+  }
+  .handle-p {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: #27e2a4;
+  }
+  .handle-d {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: #00b4fc;
+  }
+  .handle-r {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: #ff0062;
+  }
+  .table-space {
+    padding: 18px 10px 18px 10px !important;
+  }
+  .table-space-left {
+    padding: 18px 10px 18px 10px !important;
+    border-right: 2px solid darken(#f8f9fd, 3%) !important;
+  }
+  .table-tax {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+  }
+  .table-tax-d {
+    font-weight: bold;
+    font-size: 18px !important;
+    padding: 0 !important;
+    color: red;
+  }
+}
+th,
+td {
+  border: none;
+  padding: 30px;
+  font-size: 14px;
+  background: $white;
+  vertical-align: middle;
+  word-break: keep-all;
+}
+td {
+  &.handle {
+    font-weight: bold;
+  }
+  &.status {
+    span {
+      position: relative;
+      border-radius: 30px;
+      padding: 4px 10px 4px 25px;
+      &:after {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        width: 10px;
+        height: 10px;
+        content: '';
+        border-radius: 50%;
+      }
+    }
+    .ac {
+      background: lighten($ac, 25%);
+      color: darken($ac, 25%);
+      &:after {
+        background: darken($ac, 15%);
+      }
+    }
+    .tle {
+      background: lighten($tle, 25%);
+      color: darken($tle, 25%);
+      &:after {
+        background: darken($tle, 15%);
+      }
+    }
+    .wa {
+      background: lighten($wa, 25%);
+      color: darken($wa, 25%);
+      &:after {
+        background: darken($wa, 15%);
+      }
+    }
+    .rte {
+      background: lighten($rte, 25%);
+      color: darken($rte, 25%);
+      &:after {
+        background: darken($rte, 15%);
+      }
+    }
+    .pac {
+      background: lighten($pac, 25%);
+      color: darken($pac, 25%);
+      &:after {
+        background: darken($pac, 15%);
+      }
+    }
+    .mle {
+      background: lighten($mle, 25%);
+      color: darken($mle, 25%);
+      &:after {
+        background: darken($mle, 15%);
+      }
+    }
+  }
+  .img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .email {
+    span {
+      display: block;
+      &:last-child() {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  .close {
+    span {
+      font-size: 12px;
+      color: $danger;
+    }
+  }
+}
