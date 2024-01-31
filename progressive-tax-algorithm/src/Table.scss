@@ -48,6 +48,12 @@ h5,
 .ftco-section {
   > .container {
     max-width: 90vw;
+    min-width: 30vw;
+    max-height: 85vh;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

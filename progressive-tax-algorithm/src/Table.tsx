@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Table.scss';
 import TableItem from './TableItem';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Loading from './Loading';
 
 function Table({ week }: { week: number }) {
   const userList = [
@@ -22,6 +24,7 @@ function Table({ week }: { week: number }) {
   // ];
   const [data, setData] = useState<Data[]>([]);
   const [init, setInit] = useState(true);
+  const [load, setLoad] = useState(true);
   const [problemList, setProblemList] = useState<Problem[]>([]);
   const [totalProblemList, setTotalProblemList] = useState<TotalProblem[]>([]);
 
@@ -163,6 +166,7 @@ function Table({ week }: { week: number }) {
             ];
           });
         } else {
+          setLoad(false);
         }
       }
     }
@@ -171,47 +175,60 @@ function Table({ week }: { week: number }) {
   return (
     <section className="ftco-section">
       <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="table-wrap">
-              <table className="table table-responsive-xl">
-                <thead>
-                  <tr>
-                    <th>Handle</th>
-                    {problemList ? (
-                      problemList.map((ele) => {
-                        return <th>{ele.id}</th>;
+        {load ? (
+          <Loading />
+        ) : (
+          <div className="row">
+            <div className="col-md-12">
+              <div className="table-wrap">
+                <table className="table table-responsive-xl">
+                  <thead>
+                    <tr>
+                      <th>Handle</th>
+                      {problemList ? (
+                        problemList.map((ele) => {
+                          return (
+                            <th>
+                              <a
+                                href={`https://www.acmicpc.net/problem/${ele.id}`}
+                                target="_blank"
+                              >
+                                {ele.id}
+                              </a>
+                            </th>
+                          );
+                        })
+                      ) : (
+                        <></>
+                      )}
+                      <th className="table-space left">&nbsp;</th>
+                      <th className="table-space">&nbsp;</th>
+                      <th className="table-tax">누진세</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.length >= week ? (
+                      data[week - 1].data.data.map((ele) => {
+                        return (
+                          <TableItem
+                            user={ele['user']}
+                            submitResult={ele['submitResult']}
+                            tpl={totalProblemList}
+                            data={data}
+                            problemList={problemList}
+                            week={week}
+                          />
+                        );
                       })
                     ) : (
                       <></>
                     )}
-                    <th className="table-space left">&nbsp;</th>
-                    <th className="table-space">&nbsp;</th>
-                    <th className="table-tax">누진세</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.length >= week ? (
-                    data[week - 1].data.data.map((ele) => {
-                      return (
-                        <TableItem
-                          user={ele['user']}
-                          submitResult={ele['submitResult']}
-                          tpl={totalProblemList}
-                          data={data}
-                          problemList={problemList}
-                          week={week}
-                        />
-                      );
-                    })
-                  ) : (
-                    <></>
-                  )}
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

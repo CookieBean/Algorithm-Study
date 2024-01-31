@@ -4,6 +4,7 @@ import styles from './Main.module.scss';
 import axios from 'axios';
 import Table from './Table';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import Loading from './Loading';
 
 function Main() {
   const [result, setResult] = useState('');
@@ -48,6 +49,7 @@ function Main() {
         </div>
       </div>
       {week > 0 && <Table week={Number(week)}></Table>}
+      <div className={styles['text-body']}>Designed By @CookieBean</div>
     </>
   );
 }

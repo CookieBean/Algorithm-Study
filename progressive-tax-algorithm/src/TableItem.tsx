@@ -81,10 +81,6 @@ function TableItem({
     }
   }, [stack, week]);
 
-  useEffect(() => {
-    if (user.id === 'jungyun01') console.log(stack);
-  }, [stack]);
-
   return (
     <tr className={styles['alert']} role="alert">
       <td className={styles['handle-' + user.tier]}>{user.id}</td>
@@ -98,9 +94,10 @@ function TableItem({
       <td className={styles['table-space-left']}>&nbsp;</td>
       <td className={styles['table-space']}>&nbsp;</td>
       <td
-        className={styles[getTax(stack.val) > 0 ? 'table-tax-d' : 'table-tax']}
+        className={styles['table-tax']}
+        style={{ color: `rgb(${getTax(stack.val) / 140}, 0, 0)` }}
       >
-        {(getTax(stack.val) > 0 ? getTax(stack.val) : 0) + '원'}
+        {getTax(stack.val) + '원'}
       </td>
     </tr>
   );
