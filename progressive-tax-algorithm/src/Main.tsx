@@ -29,10 +29,6 @@ function Main() {
     );
   }, [param]);
 
-  useEffect(() => {
-    console.log(week);
-  }, [week]);
-
   return (
     <>
       <div className={styles['content']}>

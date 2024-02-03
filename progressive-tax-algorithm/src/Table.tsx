@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Table.scss';
 import TableItem from './TableItem';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Loading from './Loading';
 
 function Table({ week }: { week: number }) {
-  const userList = [
+  const [userList] = useState([
     { id: 'hyeonho28', tier: 'p' },
     { id: 'no13song', tier: 'g' },
     { id: 'kkomul1', tier: 'g' },
@@ -17,35 +16,36 @@ function Table({ week }: { week: number }) {
     { id: 'lumicode', tier: 'g' },
     { id: 'theolee72', tier: 's' },
     { id: 'jungyun01', tier: 's' },
-  ];
+  ]);
   // const userList = [{ id: 'hyeonho28', tier: 'p' }];
-  // const problemList = [
-  //   1309, 9278, 16132, 1735, 23048, 15897, 30194, 23041, 2673, 3012,
-  // ];
   const [data, setData] = useState<Data[]>([]);
-  const [init, setInit] = useState(true);
   const [load, setLoad] = useState(true);
-  const [problemList, setProblemList] = useState<Problem[]>([]);
   const [totalProblemList, setTotalProblemList] = useState<TotalProblem[]>([]);
 
-  useEffect(() => {
-    axios
-      .get('https://progressive-tax-algorithm.fly.dev/problem/' + week, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setProblemList(res.data);
-      })
-      .catch((err) => {
-        setProblemList([]);
-      });
-  }, [week]);
+  // const baseURI = 'https://progressive-tax-algorithm.fly.dev';
+  const baseURI = 'http://localhost:5000';
 
-  useEffect(() => {
-    if (totalProblemList.length < week) {
+  function useDidUpdateEffect(fn: any, inputs: any) {
+    const isMountingRef = useRef(false);
+
+    useEffect(() => {
+      isMountingRef.current = true;
+    }, []);
+
+    useEffect(() => {
+      if (!isMountingRef.current) {
+        return fn();
+      } else {
+        isMountingRef.current = false;
+      }
+    }, inputs);
+  }
+
+  useDidUpdateEffect(() => {
+    if (week > 0 && totalProblemList.length < week) {
       const qweek = totalProblemList.length + 1;
       axios
-        .get('https://progressive-tax-algorithm.fly.dev/problem/' + qweek, {
+        .get(baseURI + '/problem/' + qweek, {
           withCredentials: true,
         })
         .then((res) => {
@@ -58,30 +58,33 @@ function Table({ week }: { week: number }) {
             return [...tpl, { week: qweek, problems: [] }];
           });
         });
+    } else {
+      setData([{ week: 1, data: { index: 0, data: [] } }]);
     }
   }, [totalProblemList]);
 
   useEffect(() => {
-    if (totalProblemList.length >= week)
-      setData([{ week: 1, data: { index: 0, data: [] } }]);
-  }, [totalProblemList]);
+    console.log(week);
+    setLoad(true);
+    setTotalProblemList([]);
+  }, [week]);
 
-  useEffect(() => {
-    if (data.length > 0 && data.length <= week) {
+  useDidUpdateEffect(() => {
+    if (
+      userList.length === 10 &&
+      week > 0 &&
+      totalProblemList.length >= week &&
+      data.length > 0 &&
+      data.length <= week
+    ) {
       const ind = data.length - 1;
       if (data[ind].data.index >= 0 && data[ind].data.index < userList.length) {
         const ele = userList[data[ind].data.index];
         try {
           axios
-            .get(
-              'https://progressive-tax-algorithm.fly.dev/submit/' +
-                data[ind].week +
-                '/' +
-                ele.id,
-              {
-                withCredentials: true,
-              },
-            )
+            .get(baseURI + '/submit/' + data[ind].week + '/' + ele.id, {
+              withCredentials: true,
+            })
             .then((res) => {
               const row = totalProblemList[data[ind].week - 1].problems.map(
                 (elem) => {
@@ -185,10 +188,10 @@ function Table({ week }: { week: number }) {
                   <thead>
                     <tr>
                       <th>Handle</th>
-                      {problemList ? (
-                        problemList.map((ele) => {
+                      {totalProblemList.length >= week ? (
+                        totalProblemList[week - 1].problems.map((ele) => {
                           return (
-                            <th>
+                            <th key={ele.id}>
                               <a
                                 href={`https://www.acmicpc.net/problem/${ele.id}`}
                                 target="_blank"
@@ -215,8 +218,8 @@ function Table({ week }: { week: number }) {
                             submitResult={ele['submitResult']}
                             tpl={totalProblemList}
                             data={data}
-                            problemList={problemList}
                             week={week}
+                            key={ele['user'].id}
                           />
                         );
                       })

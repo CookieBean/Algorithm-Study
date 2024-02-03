@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import styles from './TableItem.module.scss';
-import { getValue } from '@testing-library/user-event/dist/utils';
 
 function TableItem({
   user,
   submitResult,
-  problemList,
   tpl,
   data,
   week,
 }: {
   user: User;
   submitResult: string[];
-  problemList: Problem[];
   tpl: TotalProblem[];
   data: Data[];
   week: number;
 }) {
   // const resType = ['ac', 'tle', 'wa', 'pac', 'pac', 'rte'];
-  const resType = 'ac';
   const [stack, setStack] = useState({ val: 0, ind: -1 });
   const [filtered, setFiltered] = useState<Calc[]>([]);
 
@@ -63,7 +58,7 @@ function TableItem({
   }, [filtered]);
 
   useEffect(() => {
-    if (week > 0) {
+    if (week > 0 && filtered.length > 0) {
       if (1 <= stack.ind + 1 && stack.ind + 1 <= week) {
         setStack({
           ind: stack.ind + 1,
@@ -79,14 +74,14 @@ function TableItem({
         });
       }
     }
-  }, [stack, week]);
+  }, [filtered, stack, week]);
 
   return (
     <tr className={styles['alert']} role="alert">
       <td className={styles['handle-' + user.tier]}>{user.id}</td>
-      {submitResult.map((ele) => {
+      {submitResult.map((ele, ind) => {
         return (
-          <td className={styles['status']}>
+          <td className={styles['status']} key={ind}>
             <span className={styles[ele]}>{ele.toUpperCase()}</span>
           </td>
         );
