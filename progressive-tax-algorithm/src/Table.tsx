@@ -22,8 +22,8 @@ function Table({ week }: { week: number }) {
   const [load, setLoad] = useState(true);
   const [totalProblemList, setTotalProblemList] = useState<TotalProblem[]>([]);
 
-  // const baseURI = 'https://progressive-tax-algorithm.fly.dev';
-  const baseURI = 'http://localhost:5000';
+  const baseURI = 'https://progressive-tax-algorithm.fly.dev';
+  // const baseURI = 'http://localhost:5000';
 
   function useDidUpdateEffect(fn: any, inputs: any) {
     const isMountingRef = useRef(false);
