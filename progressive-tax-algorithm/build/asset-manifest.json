@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/algo-study/static/css/main.7a6039ba.css",
-    "main.js": "/algo-study/static/js/main.8ee4d9a0.js",
+    "main.js": "/algo-study/static/js/main.e87687de.js",
     "static/js/27.bf622abf.chunk.js": "/algo-study/static/js/27.bf622abf.chunk.js",
     "index.html": "/algo-study/index.html"
   },
   "entrypoints": [
     "static/css/main.7a6039ba.css",
-    "static/js/main.8ee4d9a0.js"
+    "static/js/main.e87687de.js"
   ]
 }

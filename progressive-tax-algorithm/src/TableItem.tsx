@@ -46,7 +46,6 @@ function TableItem({
               data[ind].data.data.filter((e) => e.user.id === user.id)[0]
                 .submitResult[index] === 'ac',
           ).length;
-          if (ind === 0) return { neccessary: neccessary, challenge: 0 };
           return { neccessary: neccessary, challenge: challenge };
         }),
       );

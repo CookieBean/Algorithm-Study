@@ -17,7 +17,7 @@ function Table({ week }: { week: number }) {
     { id: 'theolee72', tier: 's' },
     { id: 'jungyun01', tier: 's' },
   ]);
-  // const userList = [{ id: 'hyeonho28', tier: 'p' }];
+  // const userList = [{ id: 'lumicode', tier: 'g' }];
   const [data, setData] = useState<Data[]>([]);
   const [load, setLoad] = useState(true);
   const [totalProblemList, setTotalProblemList] = useState<TotalProblem[]>([]);
@@ -46,7 +46,7 @@ function Table({ week }: { week: number }) {
       const qweek = totalProblemList.length + 1;
       axios
         .get(baseURI + '/problem/' + qweek, {
-          withCredentials: true,
+          withCredentials: false,
         })
         .then((res) => {
           setTotalProblemList((tpl: TotalProblem[]) => {
@@ -83,7 +83,7 @@ function Table({ week }: { week: number }) {
         try {
           axios
             .get(baseURI + '/submit/' + data[ind].week + '/' + ele.id, {
-              withCredentials: true,
+              withCredentials: false,
             })
             .then((res) => {
               const row = totalProblemList[data[ind].week - 1].problems.map(

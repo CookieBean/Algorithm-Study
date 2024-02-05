@@ -30,7 +30,7 @@ const headers = {
 const corsOptions = {
   // origin: 'https://cookiebean.github.io',
   origin: 'http://localhost:3000',
-  credentials: true,
+  credentials: false,
 };
 
 app.use(cors(corsOptions));
